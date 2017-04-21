@@ -59,7 +59,7 @@
 @interface TMMuiLazyScrollView()<UIScrollViewDelegate>
 
 // Store Visible Views
-@property (nonatomic, strong, readonly) NSMutableSet *visibleItems;
+@property (nonatomic, strong, readwrite) NSMutableSet *visibleItems;
 
 // Store reuseable cells by reuseIdentifier. The key is reuseIdentifier of views , value is an array that contains reuseable cells.
 @property (nonatomic,strong)NSMutableDictionary *recycledIdentifierItemsDic;
@@ -98,9 +98,6 @@
 @property (nonatomic, strong) NSMutableDictionary *enterDict;
 // Store last time visible muiID
 @property (nonatomic, strong) NSMutableSet *lastVisiblemuiID;
-// Store in Screen Visible item
-// The difference between 'visibleItems' and 'inScreenVisibleItems' is there is a buffer area in LazyScrollView(RenderBufferWindow), so 'visibleItems' contains view in 'RenderBufferWindow'
-@property (nonatomic, strong) NSMutableSet *inScreenVisibleItems;
 
 @end
 
@@ -114,13 +111,7 @@
     }
     return _enterDict;
 }
-- (NSMutableSet *)inScreenVisibleItems
-{
-    if (nil == _inScreenVisibleItems) {
-        _inScreenVisibleItems = [[NSMutableSet alloc]init];
-    }
-    return _inScreenVisibleItems;
-}
+
 - (NSMutableSet *)shouldReloadItems
 {
     if (nil == _shouldReloadItems) {
@@ -504,7 +495,7 @@
             //Then recycle the view.
             NSMutableSet *recycledIdentifierSet = [self recycledIdentifierSet:view.reuseIdentifier];
             [recycledIdentifierSet addObject:view];
-            view.hidden = YES;
+            [view removeFromSuperview];
             [recycledItems addObject:view];
         }
         else if (isReload && view.muiID) {
@@ -538,22 +529,12 @@
                 if (viewToShow)
                 {
                     viewToShow.muiID = muiID;
-                    viewToShow.hidden = NO;
                     if (![self.visibleItems containsObject:viewToShow]) {
                         [self.visibleItems addObject:viewToShow];
                     }
                 }
             }
             [self.shouldReloadItems removeObject:muiID];
-        }
-    }
-    [self.inScreenVisibleItems removeAllObjects];
-    for (UIView *view in self.visibleItems) {
-        if ([view isKindOfClass:[UIView class]] && view.superview) {
-            CGRect absRect = [view.superview convertRect:view.frame toView:self];
-            if ((absRect.origin.y + absRect.size.height >= CGRectGetMinY(self.bounds)) && (absRect.origin.y <= CGRectGetMaxY(self.bounds))) {
-                [self.inScreenVisibleItems addObject:view];
-            }
         }
     }
 }
@@ -642,7 +623,7 @@
     for (UIView *view in visibles) {
         NSMutableSet *recycledIdentifierSet = [self recycledIdentifierSet:view.reuseIdentifier];
         [recycledIdentifierSet addObject:view];
-        view.hidden = YES;
+        [view removeFromSuperview];
     }
     [_visibleItems removeAllObjects];
     [_recycledIdentifierItemsDic removeAllObjects];
