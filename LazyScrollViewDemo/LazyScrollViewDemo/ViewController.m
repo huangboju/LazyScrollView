@@ -62,10 +62,10 @@
         [rectArray addObject:[NSValue valueWithCGRect:CGRectMake((i%2)*self.view.bounds.size.width/2 + 3, 410 + i/2 *80 + 2 , self.view.bounds.size.width/2 -3, 80 - 2)]];
     }
     //Create a trible column layout with 15 elements;
-    for (int i = 0; i < 15 ; i++) {
+    for (int i = 0; i < 150; i++) {
         [rectArray addObject:[NSValue valueWithCGRect:CGRectMake((i%3)*self.view.bounds.size.width/3 + 1, 820 + i/3 *80 + 2 , self.view.bounds.size.width/3 -3, 80 - 2)]];
     }
-    scrollview.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 1230);
+    scrollview.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), 4850);
     //STEP 3 reload LazyScrollView
     [scrollview reloadData];
     

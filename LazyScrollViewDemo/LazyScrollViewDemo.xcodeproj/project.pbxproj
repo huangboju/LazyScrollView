@@ -115,7 +115,7 @@
 				TargetAttributes = {
 					70D7C6321E6427CD008B76C6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = PBH63ZAR55;
+						DevelopmentTeam = 46A8679957;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -277,8 +277,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PBH63ZAR55;
+				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = LazyScrollViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tmall.LazyScrollViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,8 +290,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PBH63ZAR55;
+				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = LazyScrollViewDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tmall.LazyScrollViewDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
